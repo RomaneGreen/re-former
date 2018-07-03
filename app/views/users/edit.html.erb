@@ -15,6 +15,7 @@
 
 <!-- <%= form_tag('/users', method: :put) do -%>
  <label for="file">Username:</label>
+
     <%=email_field_tag 'username'%> <br>
   <label for="file">Password:</label>
   <%=password_field_tag 'password'%> <br>
@@ -23,10 +24,19 @@
    <%=email_field_tag 'email'%>
   <div><%= submit_tag 'Submit' %></div>
 <% end -%> -->
-
-
-
 <%= form_for @user do |f| %>
+
+<% if @user.errors.any? %>
+  <h2>Errors:</h2>
+<ul>
+<% @user.errors.full_messages.each do |message| %>
+   <li><%= message %></li>
+<% end %>
+</ul>
+<% end %>
+
+
+
   Username: <%= f.text_field :username  %><br />
   Email : <%= f.email_field  :email, placeholder: "emaple@yahoo.com" %><br />
   Password : <%= f.password_field :password %><br />
